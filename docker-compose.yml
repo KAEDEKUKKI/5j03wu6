@@ -1,9 +1,10 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:15.3-alpine3.18
     volumes:
       - ./data/db:/var/lib/postgresql/data
+      - ./schema:/docker-entrypoint-initdb.d
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
