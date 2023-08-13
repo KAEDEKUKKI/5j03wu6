@@ -1,7 +1,27 @@
-from flask import Flask, render_template
-app = Flask(__name__)
-@app.route("/")
-def hello_world():
-    return render_template("hello_world.html")
+from flask import Flask
+from config import Config
+from flask_login import LoginManager
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    login_manager = LoginManager(app)
+    login_manager.login_view = 'auth.login'
+
+    from auth.models import Users
+    @login_manager.user_loader
+    def load_user(user_id):
+        return Users.get_user_by_id(user_id)
+
+    from main import main_bp
+    app.register_blueprint(main_bp)
+
+    from auth import auth_bp
+    app.register_blueprint(auth_bp)
+
+    return app
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050, debug=True)
+    app = create_app()
+    app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.config['DEBUG'])
