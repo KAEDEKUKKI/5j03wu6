@@ -4,7 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your App Name</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <!-- 在模板中的<head>标签内 -->
+    <script>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              var message = "{{ messages[0][1] }}";
+              var messageType = "{{ messages[0][0] }}";
+              if (messageType === "error") {
+                  alert(message);
+              }
+          {% endif %}
+      {% endwith %}
+    </script>
+    <script>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              var messageType = "{{ messages[0][0] }}";
+              if (messageType === "success") {
+                alert(message);
+              }
+          {% endif %}
+      {% endwith %}
+    </script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -20,15 +42,16 @@
       </ul>
     </div>
   </nav>
-  {% with messages = get_flashed_messages() %}
+{# 使用 Bootstrap 警告显示 Flash 消息 #}
+{% with messages = get_flashed_messages() %}
   {% if messages %}
-  <ul class="flash-messages">
     {% for message in messages %}
-    <li class="flash-message {{ message[1] }}">{{ message }}</li>
+      <div class="alert alert-{{ message.category }}" role="alert">
+        {{ message }}
+      </div>
     {% endfor %}
-  </ul>
   {% endif %}
-  {% endwith %}
+{% endwith %}
   {% block content %}{% endblock %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

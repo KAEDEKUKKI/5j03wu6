@@ -6,10 +6,11 @@
     {{ form.csrf_token }}
     <img class="mb-4" src="{{ url_for('static', filename='image/bootstrap-logo.svg') }}" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    {{ render_field(form.email, class='form-control', placeholder='Email') }}
-    {{ render_field(form.passwd, class='form-control', placeholder='Password') }}
+    {{ render_field(form.email, class='form-control my-custom-input', placeholder='Email') }}
+    {{ render_field(form.passwd, class='form-control my-custom-input', placeholder='Password') }}
     {{ render_field(form.remember) }}
     {{ render_field(form.submit, class='btn btn-primary') }}
   </form>
 </main>
 {% endblock %}
+

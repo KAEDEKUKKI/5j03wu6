@@ -3,6 +3,8 @@ from flask_login import current_user, login_user
 from . import auth_bp
 from .models import Users
 from .form import LoginForm, RegistrationForm
+from werkzeug.urls import url_parse
+
 
 @auth_bp.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -40,7 +42,7 @@ def register():
         email = form.email.data
         password = form.passwd.data
         check_password = form.confirm_password.data
-        existing_user = Users.get_user_by_email(email)
+        existing_user = Users.get_user_by_email(email, password)
         if existing_user:
             flash('Email address already exists. Please use a different email.', 'danger')
             return redirect(url_for('auth.login'))
