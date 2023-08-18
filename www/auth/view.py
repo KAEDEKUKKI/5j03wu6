@@ -39,7 +39,7 @@ def register():
 
         existing_user = Users.get_user_by_email(email)
         if existing_user:
-            flash('Email address already exists. Please use a different email.', 'danger')
+            flash('Email address already exists. Please use a different email.', 'alert-danger')
             return redirect(url_for('auth.login'))
 
         new_user = Users(
