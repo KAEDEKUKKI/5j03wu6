@@ -13,13 +13,13 @@ CREATE TABLE users (
 );
     
 ---- Table: device
---CREATE TABLE device (
---    id SERIAL PRIMARY KEY,
---    keys char(32)  NOT NULL,
---    name varchar(20)  NOT NULL,
---    CONSTRAINT device_ak_1 PRIMARY KEY  (keys)
---);
---    
+CREATE TABLE device (
+    id SERIAL PRIMARY KEY,
+    device_name VARCHAR(100),
+    device_type VARCHAR(50),
+    registration_date TIMESTAMP DEFAULT NOW()
+);
+    
 ---- Table: user_device
 --CREATE TABLE user_device (
 --    id SERIAL PRIMARY KEY,

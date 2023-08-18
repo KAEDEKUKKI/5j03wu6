@@ -4,3 +4,4 @@ Flask-WTF
 psycopg2-binary
 python-dotenv
 email_validator
+passlib

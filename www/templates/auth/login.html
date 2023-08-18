@@ -2,15 +2,26 @@
 {% from 'macros.html' import render_field %}
 {% block content %}
 <main class="form-signin">
-  <form method="POST">
-    {{ form.csrf_token }}
-    <img class="mb-4" src="{{ url_for('static', filename='image/bootstrap-logo.svg') }}" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    {{ render_field(form.email, class='form-control my-custom-input', placeholder='Email') }}
-    {{ render_field(form.passwd, class='form-control my-custom-input', placeholder='Password') }}
-    {{ render_field(form.remember) }}
-    {{ render_field(form.submit, class='btn btn-primary') }}
-  </form>
+  <div class="d-flex justify-content-center">
+    <form method="POST" class="form-signin">
+      {{ form.csrf_token }}
+      <div class="logo-container">
+        <img class="mb-4 mx-auto logo-image" src="{{ url_for('static', filename='image/bootstrap-logo.svg') }}" alt="">
+      </div>
+      <form>
+        <div class="mb-3">
+          {{ render_field(form.email, class='form-control my-custom-input', placeholder='Email') }}
+        </div>
+        <div class="mb-3">
+          {{ render_field(form.passwd, class='form-control my-custom-input', placeholder='Password') }}
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+          {{ render_field(form.remember) }}
+        </div>
+        {{ render_field(form.submit, class='btn btn-primary') }}
+      </form>
+    </form>
+  </div>
 </main>
 {% endblock %}
 

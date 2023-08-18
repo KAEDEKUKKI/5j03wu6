@@ -1,6 +1,8 @@
 {% macro render_field(field, class='', placeholder='') %}
   <div class="form-group">
-    {{ field.label(class="form-label") }}
+    {% if field.widget.input_type != 'submit' %}
+        {{ field.label(class="form-label") }}
+    {% endif %}
     {{ field(class=class, placeholder=placeholder) }}
     {% if field.errors %}
       <ul class="errors">
