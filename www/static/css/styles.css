@@ -22,3 +22,7 @@
   width: 400px;
   transform: translate(-50%, 0);
 }
+.abc{
+  max-width: 10%; /* 图像最大宽度为父元素宽度的100% */
+  height: auto;    /* 高度自动适应，保持原始宽高比 */
+}

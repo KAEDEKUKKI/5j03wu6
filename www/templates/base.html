@@ -12,7 +12,9 @@
     <div class="container">
       <a class="navbar-brand" href="/">Your App</a>
       <ul class="nav navbar-nav link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-        <li><a href="{{ url_for('auth.profile') }}">個人資料</a></li>
+        <li><a href="{{ url_for('auth.profile') }}">
+          <img class  = "abc"src="{{ url_for('static', filename='image/456.png') }}" alt="個人資料图像">
+        </a></li>
         <!-- 其他導航鏈接 -->
       </ul>
       

@@ -6,14 +6,14 @@
     <form method="POST" class="form-signin">
       {{ form.csrf_token }}
       <div class="logo-container">
-        <img class="mb-4 mx-auto logo-image" src="{{ url_for('static', filename='image/bootstrap-logo.svg') }}" alt="">
+        <img class="mb-4 mx-auto logo-image" src="{{ url_for('static', filename='image/123.png') }}" alt="">
       </div>
       <form>
         <div class="mb-3 ">
-          {{ render_field(form.email, class='form-control my-custom-input fst-italic font-monospace', placeholder='Email') }}
+          {{ render_field(form.email, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded', placeholder='Email') }}
         </div>
         <div class="mb-3">
-          {{ render_field(form.passwd, class='form-control my-custom-input fst-italic font-monospace', placeholder='Password') }}
+          {{ render_field(form.passwd, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded', placeholder='Password') }}
         </div>
         <div class="mb-3 d-flex align-items-center">
           {{ render_field(form.remember) }}
