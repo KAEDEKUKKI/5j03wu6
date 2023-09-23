@@ -19,6 +19,19 @@ CREATE TABLE device (
     device_type VARCHAR(50),
     registration_date TIMESTAMP DEFAULT NOW()
 );
+
+---- Table: group
+--CREATE TABLE group (
+--    id SERIAL PRIMARY KEY,
+--    group_name varchar(50) NOT NULL,
+--);
+
+---- Table: user_group
+--CREATE TABLE user_group (
+--    id SERIAL PRIMARY KEY,
+--    group_id int NOT NULL,
+--    user_id int NOT NULL,
+--);
     
 ---- Table: user_device
 --CREATE TABLE user_device (
@@ -26,7 +39,14 @@ CREATE TABLE device (
 --    user_id int  NOT NULL,
 --    device_id int  NOT NULL,
 --);
---    
+
+---- Table: group_device
+--CREATE TABLE group_device (
+--    id SERIAL PRIMARY KEY,
+--    group_id int NOT NULL,
+--    device_id int NOT NULL,
+--);
+ 
 ---- foreign keys
 ---- Reference: user (table: user_device)
 --ALTER TABLE user_device ADD CONSTRAINT user
