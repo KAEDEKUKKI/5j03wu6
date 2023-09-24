@@ -21,35 +21,35 @@ CREATE TABLE device (
 );
 
 ---- Table: group
---CREATE TABLE group (
---    id SERIAL PRIMARY KEY,
---    group_name varchar(50) NOT NULL,
---);
+CREATE TABLE groups (
+   id SERIAL PRIMARY KEY,
+   group_name VARCHAR(50) NOT NULL
+);
 
 ---- Table: user_group
---CREATE TABLE user_group (
---    id SERIAL PRIMARY KEY,
---    group_id int NOT NULL,
---    user_id int NOT NULL,
---);
+CREATE TABLE user_group (
+   id SERIAL PRIMARY KEY,
+   group_id int NOT NULL,
+   user_id int NOT NULL
+);
     
 ---- Table: user_device
---CREATE TABLE user_device (
---    id SERIAL PRIMARY KEY,
---    user_id int  NOT NULL,
---    device_id int  NOT NULL,
---);
+CREATE TABLE user_device (
+   id SERIAL PRIMARY KEY,
+   user_id int  NOT NULL,
+   device_id int  NOT NULL
+);
 
 ---- Table: group_device
---CREATE TABLE group_device (
---    id SERIAL PRIMARY KEY,
---    group_id int NOT NULL,
---    device_id int NOT NULL,
---);
+CREATE TABLE group_device (
+   id SERIAL PRIMARY KEY,
+   group_id int NOT NULL,
+   device_id int NOT NULL
+);
  
 ---- foreign keys
----- Reference: user (table: user_device)
---ALTER TABLE user_device ADD CONSTRAINT user
+-- -- Reference: user (table: user_device)
+-- ALTER TABLE user_device ADD CONSTRAINT user
 --    FOREIGN KEY (user_id)
 --    REFERENCES user (id);
 --    
