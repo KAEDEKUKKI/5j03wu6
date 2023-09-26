@@ -20,7 +20,7 @@ CREATE TABLE device (
     registration_date TIMESTAMP DEFAULT NOW()
 );
 
----- Table: group
+---- Table: groups
 CREATE TABLE groups (
    id SERIAL PRIMARY KEY,
    group_name VARCHAR(50) NOT NULL

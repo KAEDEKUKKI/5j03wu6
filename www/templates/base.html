@@ -17,11 +17,18 @@
         </a></li>
         <!-- 其他導航鏈接 -->
       </ul>
+
       
       <ul class="navbar-nav ms-auto">
+
+
+
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="#">Welcome, {{ current_user.first_name }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="#">Group</a>
         </li>
         <li class="nav-item">
           <a class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('auth.logout') }}">Logout</a>
@@ -33,6 +40,8 @@
         <li class="nav-item">
           <a class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('auth.register') }}">Register</a>
         </li>
+
+
         {% endif %}
       </ul>
     </div>

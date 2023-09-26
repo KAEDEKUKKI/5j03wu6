@@ -6,3 +6,9 @@ from . import main_bp
 @login_required
 def index():
     return render_template('main/index.html')
+  
+
+# @auth_bp.route('/group')
+# @login_required
+# def group():
+#     return render_template('auth/group.html')
