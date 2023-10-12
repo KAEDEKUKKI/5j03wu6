@@ -1,28 +1,23 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% from 'macros.html' import render_field %}
 {% block content %}
 <form class="row row-cols-lg-auto p-3 align-items-center">
   <div class="col-12">
     <label class="visually-hidden" for="inlineFormInputGroupUsername">Userid</label>
     <div class="input-group">
-      <div class="input-group-text">*</div>
+      <div class="input-group-text">+</div>
       <input type="text" class="form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormInputGroupUsername" placeholder="Userid">
     </div>
   </div>
 
   <div class="col-12 ">
     <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-    <select class="form-select my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded " id="inlineFormSelectPref">
-      <option selected disabled value="">Choose...</option>
-      <option value="1">Human Resources(HR)</option>
-      <option value="2">Finance Department</option>
-      <option value="3">Marketing Department</option>
-      <option value="4">Sales Department</option>
-      <option value="5">Information Technology(IT)</option>
-      <option value="6">Research and Development(R&D)</option>
-      <option value="7">Administration</option>
-      <option value="8">Product Management</option>
-    </select>
+<select class="form-select my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormSelectPref">
+  <option selected disabled value="">Choose...</option>
+  {% for group in all_groups %}
+    <option value="{{ group.id }}">{{ group.group_name }}</option>
+  {% endfor %}
+</select>
   </div>
 
   <div class="col-12">

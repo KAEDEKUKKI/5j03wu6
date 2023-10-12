@@ -23,28 +23,33 @@ CREATE TABLE device (
 ---- Table: groups
 CREATE TABLE groups (
    id SERIAL PRIMARY KEY,
-   group_name VARCHAR(50) NOT NULL
+   group_name VARCHAR(50) NOT NULL,
+   CONSTRAINT groups_ak_1 UNIQUE (group_name)
 );
 
 ---- Table: user_group
 CREATE TABLE user_group (
    id SERIAL PRIMARY KEY,
    group_id int NOT NULL,
-   user_id int NOT NULL
+   user_id int NOT NULL,
+   CONSTRAINT user_group_ak_1 UNIQUE (group_id, user_id)
 );
     
 ---- Table: user_device
 CREATE TABLE user_device (
    id SERIAL PRIMARY KEY,
    user_id int  NOT NULL,
-   device_id int  NOT NULL
+   device_id int  NOT NULL,
+   CONSTRAINT user_device_ak_1 UNIQUE (user_id, device_id)
 );
 
 ---- Table: group_device
 CREATE TABLE group_device (
    id SERIAL PRIMARY KEY,
    group_id int NOT NULL,
-   device_id int NOT NULL
+   device_id int NOT NULL,
+   CONSTRAINT group_device_ak_1 UNIQUE (group_id, device_id)
+
 );
  
 ---- foreign keys

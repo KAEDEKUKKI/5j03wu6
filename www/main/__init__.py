@@ -4,3 +4,4 @@ main_bp = Blueprint('main', __name__)
 
 from . import view
 from . import models
+
