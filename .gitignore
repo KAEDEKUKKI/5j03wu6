@@ -1,0 +1,7 @@
+data/
+venv/
+backup/
+.DS_Store
+www/__pycache__/
+www/auth/__pycache__/
+www/main/__pycache__/

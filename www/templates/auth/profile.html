@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h1>個人資料</h1>
+  <p>用戶名稱: {{ user.first_name }} {{ user.last_name }}</p>
+  <p>電子郵件: {{ user.email }}</p>
+</div>
+{% endblock %}

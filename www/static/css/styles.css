@@ -1,0 +1,35 @@
+/* styles.css */
+
+.logo-container {
+  text-align: center;
+}
+
+.logo-image {
+  max-width: 50%;
+}
+
+.alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.alert-container {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  width: 400px;
+  transform: translate(-50%, 0);
+}
+.abc{
+  max-width: 10%; 
+  height: auto;    
+}
+.def{
+  max-width: 25%; 
+  height: auto;    
+}
+.logo-image1 {
+  max-width: 45%;
+}
