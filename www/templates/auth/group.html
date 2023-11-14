@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 {% from 'macros.html' import render_field %}
 {% block content %}
-<form class="row row-cols-lg-auto p-3 align-items-center">
+<form class="row row-cols-lg-auto p-3 align-items-center" method="POST" action="/group">
   <div class="col-12">
-    <label class="visually-hidden" for="inlineFormInputGroupUsername">Userid</label>
+    <label class="visually-hidden" for="{{ form.user_id.id }}">{{ form.user_id.label }}</label>
     <div class="input-group">
       <div class="input-group-text">+</div>
-      <input type="text" class="form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormInputGroupUsername" placeholder="Userid">
+      <input type="text" id="{{ form.user_id.id }}" name="{{ form.user_id.name }}" class="form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" placeholder="Userid" value="{{ form.user_id.data }}">
     </div>
   </div>
-
   <div class="col-12 ">
     <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-<select class="form-select my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormSelectPref">
-  <option selected disabled value="">Choose...</option>
-  {% for group in all_groups %}
-    <option value="{{ group.id }}">{{ group.group_name }}</option>
-  {% endfor %}
-</select>
+    <select class="form-select my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormSelectPref" name="inlineFormSelectPref">
+        <option selected disabled value="">Choose...</option>
+        {% for group in all_groups %}
+          <option value="{{ group.id }}">{{ group.group_name }}</option>
+        {% endfor %}
+    </select>
   </div>
 
   <div class="col-12">

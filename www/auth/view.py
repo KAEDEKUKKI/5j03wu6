@@ -31,10 +31,6 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-# @auth_bp.route('/group')
-# @login_required
-# def group():
-#   return render_template('auth/group.html')
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():

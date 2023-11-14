@@ -50,6 +50,7 @@ class Groups:
                     cursor.execute(query, (group_name,))
                     group_data = cursor.fetchone()
                     conn.commit()
+                    return group_data
         except (Exception, psycopg2.Error) as error:
             print("EError creating group:", error)
             return None
@@ -99,10 +100,10 @@ class Groups1:   #group_user
             print("Error creating Users_Groups:", error)
             return None
     @classmethod
-    def get_group_by_ids(cls, user_id, group_id):
+    def get_group_by_ids(cls,  group_id, user_id,):
         query = "SELECT id, group_id, user_id FROM user_group WHERE group_id = %s AND user_id = %s"
         try:
-                user_group_data = cls.get_group_data(query, (group_id, user_id))
+                user_group_data = cls.get_group_data(query, (group_id, user_id,))
                 if user_group_data:
                     id, group_id, user_id = user_group_data
                     user_group = cls(group_id, user_id)
