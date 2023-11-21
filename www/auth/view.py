@@ -15,7 +15,7 @@ def login():
         password = form.passwd.data
         remember = form.remember.data
 
-        user = Users.get_user_by_email(email)
+        user = Users.get_by_email(email)
         if user and user.check_password(password):
             login_user(user, remember=remember)
             flash('Logged in successfully', 'alert-success')
@@ -38,7 +38,7 @@ def register():
     if form.validate_on_submit():
         email = form.email.data
 
-        existing_user = Users.get_user_by_email(email)
+        existing_user = Users.get_by_email(email)
         if existing_user:
             flash('Email address already exists. Please use a different email.', 'alert-danger')
             return redirect(url_for('auth.login'))

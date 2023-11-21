@@ -28,9 +28,6 @@
           <a class="nav-link" href="#">Welcome, {{ current_user.first_name }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('main.group') }}">Group</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('auth.logout') }}">Logout</a>
         </li>
         {% else %}
