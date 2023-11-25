@@ -2,10 +2,19 @@
 {% from 'macros.html' import render_field %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+    .offset-up {
+        margin-top: -150px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        background-color: #f8f9fa; 
+    }
+</style>
+
 <div class="container">
-  <h1>個人資料</h1>
-  <p>用戶名稱: {{ user.first_name }} {{ user.last_name }}</p>
-  <p>電子郵件: {{ user.email }}</p>
+    <h1>個人資料</h1>
+    <p>用戶名稱: {{ user.first_name }} {{ user.last_name }}</p>
+    <p>電子郵件: {{ user.email }}</p>
 </div>
 
 <form class="row row-cols-lg-auto align-items-center"action="{{ url_for('auth.profile') }}" method="post">
@@ -32,10 +41,6 @@
     </div>
 </form> 
 
-
-
-
-
 <form method="post" action="{{ url_for('auth.profile') }}">
   <div class="col-12 d-flex justify-content-between mb-3 col-sm-3">
     <div class="col-8">
@@ -56,4 +61,28 @@
     </div>
   </div>
 </form>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-8 text-right offset-up">
+            {% for group in all_groups %}
+                <p>Group ID: {{ group['id'] }}, Group Name: {{ group['group_name'] }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-8 text-right offset-up">
+            {% for group_info in all_group1_info %}
+                <p>Group1 ID: {{ group_info['id'] }}, User ID: {{ group_info['user_id'] }}, Group ID: {{ group_info['group_id'] }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}

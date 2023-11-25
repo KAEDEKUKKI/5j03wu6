@@ -113,5 +113,7 @@ def profile():
 
 
     all_groups = Groups.get_all_group_names()
+    all_group1_info = Groups1.get_all_info()
 
-    return render_template('auth/profile.html', user=user, all_groups=all_groups)
+
+    return render_template('auth/profile.html', user=user, all_groups=all_groups,all_group1_info=all_group1_info)

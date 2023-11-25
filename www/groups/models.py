@@ -152,3 +152,15 @@ class Groups1:   #group_user
         except (Exception, psycopg2.Error) as error:
             print("删除group1时出错:", error)
             return False
+    @classmethod
+    def get_all_info(cls):
+        query = "SELECT id, group_id, user_id FROM group1"
+        try:
+            with cls._get_connection() as conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(query)
+                    group_data = cursor.fetchall()
+                    return [{"id": id, "group_id": group_id, "user_id": user_id} for id, group_id, user_id in group_data]
+        except (Exception, psycopg2.Error) as error:
+            print("Error fetching all group1 data:", error)
+            return []
