@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField,SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
         
 class LoginForm(FlaskForm):
@@ -19,3 +19,13 @@ class RegistrationForm(FlaskForm):
     ])
     submit = SubmitField('Register')
 
+
+
+class GroupForm(FlaskForm):
+    group_name = StringField('Group Name', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class Group_UserForm(FlaskForm):
+    user_id = StringField('User ID', validators=[DataRequired()])
+    inlineFormSelectPref = SelectField('Preference', choices=[], validators=[DataRequired()])
+    submit = SubmitField('Add')

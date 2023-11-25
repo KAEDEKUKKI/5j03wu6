@@ -28,8 +28,11 @@
 }
 .def{
   max-width: 25%; 
-  height: auto;    
+  height: auto;   
 }
 .logo-image1 {
   max-width: 45%;
+}
+.aa {
+    writing-mode: horizontal-tb;
 }

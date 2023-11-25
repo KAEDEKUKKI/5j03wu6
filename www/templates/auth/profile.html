@@ -1,8 +1,59 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% from 'macros.html' import render_field %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <div class="container">
   <h1>個人資料</h1>
   <p>用戶名稱: {{ user.first_name }} {{ user.last_name }}</p>
   <p>電子郵件: {{ user.email }}</p>
 </div>
+
+<form class="row row-cols-lg-auto align-items-center"action="{{ url_for('auth.profile') }}" method="post">
+    <div class="col-12">
+      <label class="visually-hidden" for="inlineFormInputGroupUsername">Userid</label>
+      <div class="input-group">
+        <input type="text" name="user_id" class="form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormInputGroupUsername" placeholder="Userid">
+      </div>
+    </div>
+
+    <div class="col-12 ">
+      <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+      <select name="group_id" class="form-select my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="inlineFormSelectPref">
+        <option selected disabled value="">Choose...</option>
+        {% for group in all_groups %}
+          <option value="{{ group.id }}">{{ group.group_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary"name="action" value="add">Add</button>
+      <button type="submit" class="btn btn-danger" name="action" value="delete">Delete</button>
+    </div>
+</form> 
+
+
+
+
+
+<form method="post" action="{{ url_for('auth.profile') }}">
+  <div class="col-12 d-flex justify-content-between mb-3 col-sm-3">
+    <div class="col-8">
+      <label class="visually-hidden" for="group_name">Group</label>
+      <input type="text" name="group_name" class="form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded" id="additionalInput" placeholder="Group">
+    </div>
+
+    <div class="col-1">
+      <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#addModal" name="create_group">
+        新增
+      </button>
+    </div>
+
+    <div class="col-1">
+      <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" name="delete_group"value="group_id">
+        刪除
+      </button>
+    </div>
+  </div>
+</form>
 {% endblock %}

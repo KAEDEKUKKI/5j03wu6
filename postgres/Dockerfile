@@ -1,4 +1,4 @@
-FROM postgres:15.1-alpine3.17
+FROM postgres:14.9-alpine3.17
 
 COPY schema/*.sql /docker-entrypoint-initdb.d/
 

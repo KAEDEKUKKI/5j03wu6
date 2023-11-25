@@ -13,13 +13,17 @@ def create_app():
     from auth.models import Users
     @login_manager.user_loader
     def load_user(user_id):
-        return Users.get_user_by_id(user_id)
+        return Users.get_by_id(user_id)
 
     from main import main_bp
     app.register_blueprint(main_bp)
 
     from auth import auth_bp
     app.register_blueprint(auth_bp)
+
+    from groups import group_bp
+    app.register_blueprint(group_bp)
+
 
     return app
 
