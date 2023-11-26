@@ -127,19 +127,19 @@ class Groups1:   #group_user
         except (Exception, psycopg2.Error) as error:
             print("Error creating group1:", error)
             return None
-    @classmethod
-    def get_group_by_ids(cls,  group_id, user_id,):
-        query = "SELECT id, group_id, user_id FROM group1 WHERE group_id = %s AND user_id = %s"
-        try:
-            user_group_data = cls.get_group_data(query, (group_id, user_id,))
-            if user_group_data:
-                id, group_id, user_id = user_group_data
-                user_group = cls(group_id, user_id)
-                user_group.id = id
-                return group1
-        except (Exception, psycopg2.Error) as error:
-            print("Error getting user group by IDs:", error)
-            return None
+    # @classmethod
+    # def get_group_by_ids(cls,  group_id, user_id,):
+    #     query = "SELECT id, group_id, user_id FROM group1 WHERE group_id = %s AND user_id = %s"
+    #     try:
+    #         user_group_data = cls.get_group_data(query, (group_id, user_id,))
+    #         if user_group_data:
+    #             id, group_id, user_id = user_group_data
+    #             user_group = cls(group_id, user_id)
+    #             user_group.id = id
+    #             return group1
+    #     except (Exception, psycopg2.Error) as error:
+    #         print("Error getting user group by IDs:", error)
+    #         return None
     @classmethod
     def delete(cls, group_id, user_id):
         query = "DELETE FROM group1 WHERE group_id = %s AND user_id = %s"
@@ -163,4 +163,18 @@ class Groups1:   #group_user
                     return [{"id": id, "group_id": group_id, "user_id": user_id} for id, group_id, user_id in group_data]
         except (Exception, psycopg2.Error) as error:
             print("Error fetching all group1 data:", error)
+            return []
+
+    @classmethod
+    def get_all_users_names(cls):
+        query = "SELECT id, first_name, last_name FROM users"
+        try:
+            with cls._get_connection() as conn:
+                with conn.cursor() as cursor:
+                    cursor.execute(query)
+                    user_data = cursor.fetchall()
+                    users = [{"id": id, "first_name": first_name, "last_name": last_name} for id, first_name, last_name in user_data]
+                    return users
+        except (Exception, psycopg2.Error) as error:
+            print("Error fetching all users names:", error)
             return []

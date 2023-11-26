@@ -1,5 +1,7 @@
 from system.database import Database
 from system.crypto import MyCrypto
+import psycopg2
+
 
 class Users():
     def __init__(self, first_name, last_name, email):
@@ -9,6 +11,7 @@ class Users():
         self.email = email
         self.passwd = None
         self.start_time = None
+
 
     @staticmethod
     def get_by_id(user_id):
@@ -81,3 +84,7 @@ class Users():
     @property
     def is_anonymous(self):
         return False
+
+
+
+
