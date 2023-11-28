@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, Response
 from flask_login import login_required
 
 from system.camera import CameraStreamer
@@ -16,10 +16,11 @@ def index():
         d_name = form.device_name.data
         d_type = form.device_type.data
         ip = form.ip_address.data
+        port = form.protocol_port.data
 
-        new_device = Device(d_name, d_type, ip)
+        new_device = Device(d_name, d_type, ip, port)
 
-        existing_device = Device.get_by_ip(new_device.ip_address)
+        existing_device = Device.get_by_ip(new_device.ip_address, new_device.protocol_port)
         if existing_device:
             flash('A device with the same IP already exists.', 'alert-warning')
             return redirect(url_for('main.index'))
@@ -40,5 +41,10 @@ def index():
 @login_required
 def device_view(device_id):
     device = Device.get_by_id(device_id)
-
     return render_template('main/device_view.html', device=device)
+
+@main_bp.route('/video_feed/<string:ip>:<string:port>', methods=['GET', 'POST'])
+@login_required
+def video_feed(ip, port):
+    video = CameraStreamer(ip, port)
+    return Response(video.establish_connection(), mimetype='multipart/x-mixed-replace; boundary=frame')

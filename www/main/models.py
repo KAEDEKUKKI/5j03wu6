@@ -15,21 +15,21 @@ class Device:
         with Database() as db:
             data = db.execute_query(query, (d_id,), fetch_one=True)
             if data:
-                id, device_name, device_type, ip_address, registration_date = data
-                device = Device(device_name, device_type, ip_address)
+                id, device_name, device_type, ip_address, protocol_port, registration_date = data
+                device = Device(device_name, device_type, ip_address, protocol_port)
                 device.id = id
                 device.registration_date = registration_date
                 return device
         return None
 
     @staticmethod
-    def get_by_ip(ip):
-        query = "SELECT * FROM device WHERE ip_address = %s"
+    def get_by_ip(ip, port):
+        query = "SELECT * FROM device WHERE ip_address = %s AND protocol_port = %s"
         with Database() as db:
-            data = db.execute_query(query, (ip,), fetch_one=True)
+            data = db.execute_query(query, (ip, port,), fetch_one=True)
             if data:
-                id, device_name, device_type, ip_address, registration_date = data
-                device = Device(device_name, device_type, ip_address)
+                id, device_name, device_type, ip_address, protocol_port, registration_date = data
+                device = Device(device_name, device_type, ip_address, protocol_port)
                 device.id = id
                 device.registration_date = registration_date
                 return device
@@ -42,8 +42,8 @@ class Device:
             data = db.execute_query(query, (), fetch_one=False)
             devices = []
             for row in data:
-                id, device_name, device_type, ip_address, registration_date = row
-                device = Device(device_name, device_type, ip_address)
+                id, device_name, device_type, ip_address, protocol_port, registration_date = row
+                device = Device(device_name, device_type, ip_address, protocol_port)
                 device.id = id
                 device.registration_date = registration_date
                 devices.append(device)

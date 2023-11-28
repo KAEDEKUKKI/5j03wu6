@@ -1,5 +1,5 @@
 {% extends "base.html" %}
 {% from 'macros.html' import render_field %}
 {% block content %}
-
+<img src="{{ url_for('main.video_feed', ip=device.ip_address, port=device.protocol_port) }}" alt="Video Stream">
 {% endblock %}

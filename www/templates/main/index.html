@@ -9,7 +9,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ device.device_name }}</h5>
             <p class="card-text">{{ device.ip_address }}</p>
-            <a href="{{ url_for('device_view', device_id=device.id) }}" class="btn btn-primary">Go</a>
+            <a href="{{ url_for('main.device_view', device_id=device.id) }}" class="btn btn-primary">Go</a>
           </div>
         </div>
       </div>
@@ -38,8 +38,13 @@
           <div class="mb-3">
             {{ render_field(form.device_type, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
           </div>
-          <div class="mb-3">
-            {{ render_field(form.ip_address, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+          <div class="row">
+            <div class="col">
+              {{ render_field(form.ip_address, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+            </div>
+            <div class="col">
+              {{ render_field(form.protocol_port, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+            </div>
           </div>
         </div>
         <div class="modal-footer">
