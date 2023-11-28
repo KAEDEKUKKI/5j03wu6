@@ -1,1 +1,53 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% from 'macros.html' import render_field %}
+{% block content %}
+<div class="text-center m-3">
+  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+    {% for device in devices %}
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ device.device_name }}</h5>
+            <p class="card-text">{{ device.ip_address }}</p>
+            <a href="{{ url_for('device_view', device_id=device.id) }}" class="btn btn-primary">Go</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="fixed-bottom m-3">
+    <button type="button" class="btn btn-primary btn-square" data-bs-toggle="modal" data-bs-target="#exampleModal">＋</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Manual setting</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST">
+        {{ form.csrf_token }}
+        <div class="modal-body">
+          <div class="mb-3 ">
+            {{ render_field(form.device_name, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+          </div>
+          <div class="mb-3">
+            {{ render_field(form.device_type, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+          </div>
+          <div class="mb-3">
+            {{ render_field(form.ip_address, class='form-control my-custom-input fst-italic font-monospace shadow p-3 bg-body-tertiary rounded') }}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {{ render_field(form.submit, class='btn btn-primary') }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

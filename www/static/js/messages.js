@@ -1,4 +1,3 @@
-// custom.js
 // 自動關閉 alert 訊息框
 function autoCloseAlert() {
   var alertElement = document.querySelector('.alert');

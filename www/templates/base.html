@@ -3,26 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your App Name</title>
+  <title>攝像頭的安全請求驗證與權限管理</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="/">Your App</a>
+      <a class="navbar-brand" href="/">Home</a>
       <ul class="nav navbar-nav link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
         <li><a href="{{ url_for('auth.profile') }}">
-          <img class  = "abc"src="{{ url_for('static', filename='image/456.png') }}" alt="個人資料图像">
+          <img class="abc" src="{{ url_for('static', filename='image/456.png') }}">
         </a></li>
         <!-- 其他導航鏈接 -->
       </ul>
-
-      
+     
       <ul class="navbar-nav ms-auto">
-
-
-
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="#">Welcome, {{ current_user.first_name }}</a>
@@ -41,11 +37,11 @@
       </ul>
     </div>
   </nav>
-  <!-- 新增的警示框容器 -->
+  <!-- 警示框容器 -->
     <div id="alert-container" class="alert-container">
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-      <div class="alert alert-dismissible fade show {{messages[0][0]}}" role="alert">
+      <div class="alert {{messages[0][0]}} alert-dismissible fade show" role="alert">
         {{ messages[0][1] }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>

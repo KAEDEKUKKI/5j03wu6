@@ -43,7 +43,6 @@ class Users():
             if stored_password:
                 crypto = MyCrypto()
                 stored_password_str = stored_password[0]
-                print(stored_password_str)
 
                 # Check if the stored password is in the correct bcrypt format
                 if len(stored_password_str) == 60 and stored_password_str.startswith("$2b$"):

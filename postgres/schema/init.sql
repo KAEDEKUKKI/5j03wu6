@@ -18,6 +18,7 @@ CREATE TABLE device (
     device_name VARCHAR(100),
     device_type VARCHAR(50),
     ip_address VARCHAR(15),
+    protocol_port VARCHAR(5),
     registration_date TIMESTAMP DEFAULT NOW()
 );
 

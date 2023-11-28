@@ -29,7 +29,6 @@ class Handshake:
             result = bytes(self.mm[1]) + bytes(self.rr[2])
             encrypt_result = self.crypto.aes_encrypt(result, self.mm[0])
             return bytes(encrypt_result)
-        print("[ERROR] M1 verification Failed.")
         return bytes([0] * self.hash_size*2)
 
     def get_all_variables(self):
@@ -45,3 +44,13 @@ class Handshake:
 
     def byte_array_to_string(self, array):
         return ''.join(f"{byte:02X}" for byte in array)
+
+    def perform_handshake(self, client):
+        msg = self.client_hello()
+        client.sendall('A'.encode('utf-8') + msg)
+        response = client.recv(65)
+        if response[0:1] == b'B':
+            msg = self.certificate(response[1:])
+            client.sendall('C'.encode('utf-8') + msg)
+        else:
+            client.close()
