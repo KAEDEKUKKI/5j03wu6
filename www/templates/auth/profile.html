@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <h1>個人資料</h1>
-  <p>用戶名稱: {{ user.first_name }} {{ user.last_name }}</p>
-  <p>電子郵件: {{ user.email }}</p>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title display-4 mb-4">Profile</h1>
+      <div class="mb-3">
+        <p class="card-text h4">Full Name:</p>
+        <p class="card-text">{{ user.first_name }} {{ user.last_name }}</p>
+      </div>
+      <div class="mb-3">
+        <p class="card-text h4">Mail:</p>
+        <p class="card-text">{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
 </div>
+
 {% endblock %}

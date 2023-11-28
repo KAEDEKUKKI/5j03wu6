@@ -9,7 +9,7 @@ class Handshake:
         self.crypto = MyCrypto()
 
     def session_key(self):
-        key = bytes(self.rr[0]) + bytes(self.rr[1]) + bytes(self.rr[2]) + self.crypto.hash(self.IDi + self.crypto.x)
+        key = bytes(self.rr[0]) + bytes(self.rr[1]) + bytes(self.rr[2]) + self.crypto.hash(bytes(self.IDi) + self.crypto.x)
         return self.crypto.aes_encrypt(self.crypto.hash(key), self.mm[1])
 
     def client_hello(self):
@@ -23,9 +23,9 @@ class Handshake:
         decrypted_msg = self.crypto.aes_decrypt(receive, self.crypto.x)
         self.mm[0] = decrypted_msg[:self.hash_size]
         self.rr[1] = decrypted_msg[self.hash_size:self.hash_size*2]
-        if self.mm[0] == self.crypto.hash(bytes(self.rr[1]) + self.crypto.hash(self.IDi + self.crypto.x) + bytes(self.rr[0])):
-            self.crypto.generate_random_data(self.rr[2])
-            self.mm[1] = self.crypto.hash(bytes(self.rr[2]) + bytes(self.rr[1]) + self.crypto.hash(self.IDi + self.crypto.x))
+        if self.mm[0] == self.crypto.hash(bytes(self.rr[1]) + self.crypto.hash(bytes(self.IDi) + self.crypto.x) + bytes(self.rr[0])):
+            self.rr[2] = self.crypto.generate_random_data()
+            self.mm[1] = self.crypto.hash(bytes(self.rr[2]) + bytes(self.rr[1]) + self.crypto.hash(bytes(self.IDi) + self.crypto.x))
             result = bytes(self.mm[1]) + bytes(self.rr[2])
             encrypt_result = self.crypto.aes_encrypt(result, self.mm[0])
             return bytes(encrypt_result)

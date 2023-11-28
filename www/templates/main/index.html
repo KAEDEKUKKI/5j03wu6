@@ -8,8 +8,8 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{ device.device_name }}</h5>
-            <p class="card-text">{{ device.ip_address }}</p>
-            <a href="{{ url_for('main.device_view', device_id=device.id) }}" class="btn btn-primary">Go</a>
+            <p class="card-text">{{ device.ip_address }}:{{ device.protocol_port }}</p>
+            <a href="{{ url_for('main.device_view', device_id=device.id) }}" class="btn btn-primary">View</a>
           </div>
         </div>
       </div>

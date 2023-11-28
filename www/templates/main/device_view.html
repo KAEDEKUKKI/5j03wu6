@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 {% from 'macros.html' import render_field %}
 {% block content %}
-<img src="{{ url_for('main.video_feed', ip=device.ip_address, port=device.protocol_port) }}" alt="Video Stream">
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Live</h3>
+        </div>
+        <div class="card-body">
+          <div class="ratio ratio-4x3">
+            <img id="video-feed" alt="Video Stream" src="{{ url_for('main.video_feed', ip=device.ip_address, port=device.protocol_port) }}" class="img-fluid">
+          </div>
+        </div>
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <form method="POST">
+        {{ form.csrf_token }}
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-subtitle mb-2 text-muted">{{ device.device_name }}</h5>
+                <p class="card-text">IP: {{ device.ip_address }} | Port: {{ device.protocol_port }}</p>
+                <p class="card-text">Registration Date: {{ device.registration_date|default("N/A") }}</p>
+                {{ render_field(form.rm, class='btn btn-danger') }}
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

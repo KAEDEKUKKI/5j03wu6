@@ -51,7 +51,7 @@ class Device:
         return None
 
     def create(self):
-        query = "INSERT INTO device (device_name, device_type, ip_address, protocol_port) VALUES (%s, %s, %s, %s) RETURNING id, registration_date"
+        query = "INSERT INTO device (device_name, type_id, ip_address, protocol_port) VALUES (%s, %s, %s, %s) RETURNING id, registration_date"
         with Database() as db:
             data = db.execute_query(query, (self.device_name, self.device_type, self.ip_address, self.protocol_port,), fetch_one=True)
             if data:
@@ -59,3 +59,32 @@ class Device:
                 db.connection.commit()
                 return self.id
         return None  
+
+    def delete(self):
+        query = "DELETE FROM device WHERE id = %s RETURNING id"
+        with Database() as db:
+            data = db.execute_query(query, (self.id,), fetch_one=True)
+            if data:
+                deleted_id = data[0]
+                db.connection.commit()
+                return deleted_id
+        return None
+
+class DeviceType:
+    def __init__(self, type_name):
+        self.id = None
+        self.name = type_name
+
+    @staticmethod
+    def get_all():
+        query = "SELECT * FROM type1"
+        with Database() as db:
+            data = db.execute_query(query, (), fetch_one=False)
+            types = []
+            for row in data:
+                id, type_name = row
+                d_type = DeviceType(type_name)
+                d_type.id = id
+                types.append(d_type)
+            return types
+        return None

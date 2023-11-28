@@ -1,11 +1,8 @@
 /* styles.css */
 
-.logo-container {
-  text-align: center;
-}
-
 .logo-image {
-  max-width: 50%;
+  max-width: 168px; /* Adjust the max-width to your preference */
+  height: auto;
 }
 
 .alert-container {

@@ -3,10 +3,10 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
         
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "EMAIL"})
+    email = StringField('Email', validators=[DataRequired()], render_kw={"placeholder": "EMAIL"})
     passwd = PasswordField('Password', validators = [DataRequired(), Length(min=6)], render_kw={"placeholder": "PASSWORD"})
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Log In')
+    submit = SubmitField('LOGIN')
 
 class RegistrationForm(FlaskForm):
     f_name = StringField('Frist Name', validators=[DataRequired(message='Fist Name is required.'), Length(max=20)])

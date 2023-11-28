@@ -15,6 +15,9 @@ def login():
         email = form.email.data
         password = form.passwd.data
         remember = form.remember.data
+        
+        if '@' not in email:
+            email += '@5j03wu6.com'
 
         user = Users.get_by_email(email)
         if user and user.check_password(password):
