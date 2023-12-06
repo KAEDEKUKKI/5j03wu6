@@ -42,13 +42,13 @@ class Groups:
         return None
 
 class UserGroup:
-    def __init__(self, user_id, group_id, read_p, write_p, delete_p):
+    def __init__(self, user_id, group_id):
         self.id = None
         self.user_id = user_id
         self.group_id = group_id
-        self.read_p = read_p
-        self.write_p = write_p
-        self.delete_p = delete_p
+        self.read_p = True
+        self.write_p = True
+        self.delete_p = False
 
     @staticmethod
     def get_by_user_group(user_id, group_id):
@@ -117,8 +117,11 @@ class UserDevice:
             data = db.execute_query(query, (user_id, device_id), fetch_one=True)
             if data:
                 id, user_id, device_id, read_p, write_p, delete_p = data
-                user_device = UserDevice(user_id, device_id, read_p, write_p, delete_p)
+                user_device = UserDevice(user_id, device_id)
                 user_device.id = id
+                group_device.read_p = read_p
+                group_device.write_p = write_p
+                group_device.delete_p = delete_p
                 return user_device
         return None
 
@@ -130,8 +133,11 @@ class UserDevice:
             user_devices = []
             for row in data:
                 id, user_id, device_id, read_p, write_p, delete_p = row
-                user_device = UserDevice(user_id, device_id, read_p, write_p, delete_p)
+                user_device = UserDevice(user_id, device_id)
                 user_device.id = id
+                group_device.read_p = read_p
+                group_device.write_p = write_p
+                group_device.delete_p = delete_p
                 user_devices.append(user_device)
             return user_devices
         return None
@@ -172,13 +178,13 @@ class UserDevice:
             db.connection.commit()
 
 class GroupDevice:
-    def __init__(self, group_id, device_id, read_p, write_p, delete_p):
+    def __init__(self, group_id, device_id):
         self.id = None
         self.group_id = group_id
         self.device_id = device_id
-        self.read_p = read_p
-        self.write_p = write_p
-        self.delete_p = delete_p
+        self.read_p = True
+        self.write_p = True
+        self.delete_p = False
 
     @staticmethod
     def get_by_group_device(group_id, device_id):
@@ -186,9 +192,12 @@ class GroupDevice:
         with Database() as db:
             data = db.execute_query(query, (group_id, device_id), fetch_one=True)
             if data:
-                id, group_id, device_id, read_p, write_p, delete_p = data
-                group_device = GroupDevice(group_id, device_id, read_p, write_p, delete_p)
+                id, group_id, device_id = data
+                group_device = GroupDevice(group_id, device_id)
                 group_device.id = id
+                group_device.read_p = read_p
+                group_device.write_p = write_p
+                group_device.delete_p = delete_p
                 return group_device
         return None
 
@@ -200,8 +209,11 @@ class GroupDevice:
             group_devices = []
             for row in data:
                 id, group_id, device_id, read_p, write_p, delete_p = row
-                group_device = GroupDevice(group_id, device_id, read_p, write_p, delete_p)
+                group_device = GroupDevice(group_id, device_id)
                 group_device.id = id
+                group_device.read_p = read_p
+                group_device.write_p = write_p
+                group_device.delete_p = delete_p
                 group_devices.append(group_device)
             return group_devices
         return None

@@ -6,7 +6,8 @@ import struct
 from .handshake import Handshake 
 
 class CameraStreamer:
-    def __init__(self, server_address, server_port, max_disconnect_count=3):
+    def __init__(self, device_id, server_address, server_port, max_disconnect_count=3):
+        self.id = device_id
         self.server_address = server_address
         self.server_port = server_port
         self.max_disconnect_count = max_disconnect_count
@@ -55,7 +56,7 @@ class CameraStreamer:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
             try:
                 client.connect((self.server_address, self.server_port))
-                self.handshake.perform_handshake(client)
+                self.handshake.perform_handshake(client, self.id)
                 disconnect_count = 0  # 計算斷線次數
                 while disconnect_count < self.max_disconnect_count:
                     try:

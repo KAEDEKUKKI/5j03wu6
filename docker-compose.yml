@@ -7,7 +7,7 @@ services:
       - ./backup:/pg_backups
     ports:
       - "5432:5432"
-  web:
+  flask:
     build: ./flask
     command: python app.py
     volumes:

@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <div class="ratio ratio-4x3">
-            <img id="video-feed" alt="Video Stream" src="{{ url_for('main.video_feed', ip=device.ip_address, port=device.protocol_port) }}" class="img-fluid">
+            <img id="video-feed" alt="Video Stream" src="{{ url_for('main.video_feed', id=device.id, ip=device.ip_address, port=device.protocol_port) }}" class="img-fluid">
           </div>
         </div>
         <div class="card-footer">

@@ -12,8 +12,8 @@ class Handshake:
         key = bytes(self.rr[0]) + bytes(self.rr[1]) + bytes(self.rr[2]) + self.crypto.hash(bytes(self.IDi) + self.crypto.x)
         return self.crypto.aes_encrypt(self.crypto.hash(key), self.mm[1])
 
-    def client_hello(self):
-        self.IDi = self.crypto.generate_random_data()
+    def client_hello(self, id):
+        self.IDi = self.crypto.hash(id)
         self.rr[0] = self.crypto.generate_random_data()
         result = bytes(self.IDi) + bytes(self.rr[0])
         encrypt_result = self.crypto.aes_encrypt(result, self.crypto.x)
@@ -45,8 +45,8 @@ class Handshake:
     def byte_array_to_string(self, array):
         return ''.join(f"{byte:02X}" for byte in array)
 
-    def perform_handshake(self, client):
-        msg = self.client_hello()
+    def perform_handshake(self, client, id):
+        msg = self.client_hello(id)
         client.sendall('A'.encode('utf-8') + msg)
         response = client.recv(65)
         if response[0:1] == b'B':

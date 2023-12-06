@@ -60,11 +60,11 @@ def device_view(device_id):
 
     return render_template('main/device_view.html', form=form, device=device)
 
-@main_bp.route('/video_feed/<string:ip>:<int:port>', methods=['GET', 'POST'])
+@main_bp.route('/video_feed/<string:id>:<string:ip>:<int:port>', methods=['GET', 'POST'])
 @login_required
-def video_feed(ip, port):
+def video_feed(id, ip, port):
     try:
-        video = CameraStreamer(ip, port)
+        video = CameraStreamer(id, ip, port)
     except Exception as e:
         flash(f'Error establishing video feed: {str(e)}', 'alert-danger')
         return redirect(url_for('main.index'))
